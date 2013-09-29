@@ -1,16 +1,43 @@
+/*
+   Copyright 2013 Harri Smatt
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
+
+//
+// Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com>
+// For additional information please go and see:
+// http://incubator.quasimondo.com/processing/fast_blur_deluxe.php
+//
+
 #pragma version(1)
 #pragma rs java_package_name(fi.harism.anndblur)
 #pragma rs_fp_imprecise
 
 #include "rs_types.rsh"
-#include "rs_debug.rsh"
 
+//
+// For holding current bitmap size
+//
 typedef struct SizeStruct {
     int width;
     int height;
 } SizeStruct_t;
 SizeStruct_t sizeStruct;
 
+//
+// For holding current stack blur related variables
+//
 typedef struct RadiusStruct {
     int radius;
     int div;
@@ -18,30 +45,32 @@ typedef struct RadiusStruct {
 } RadiusStruct_t;
 RadiusStruct_t radiusStruct;
 
+//
+// Variables for dynamic allocations
+//
 uchar4* bitmap;
 uchar3* rgb;
 uint8_t* dv;
 
+//
+// For initializing divisor allocation
+//
 int initializeDv_divsum;
 void initializeDv(uint8_t* out, const void* userdata, uint32_t x) {
     *out = x / initializeDv_divsum;
 }
 
-void filll(const uint8_t* unused, const void* userData, uint32_t x) {
-    for (int i = 0; i <= sizeStruct.width / 2; ++i) {
-        bitmap[x * (sizeStruct.width) + i].rgb = 0;
-    }
-}
-
+//
+// Handles horizontal stack blur step
+//
 void blurHorizontal(const uchar4* unused, const void* userData, uint32_t x, uint32_t y) {
     uint3 sum = 0, insum = 0, outsum = 0;
     uint8_t r1 = radiusStruct.radius + 1;
     uint32_t yw = y * sizeStruct.width;
     int wmax = sizeStruct.width - 1;
     
-    uint16_t stackpointer = radiusStruct.radius;
     uint16_t stackstart;
-    
+    uint16_t stackpointer = radiusStruct.radius;    
     uint3 stack[radiusStruct.radius + radiusStruct.radius + 1];
     
     for (int i = -radiusStruct.radius; i <= radiusStruct.radius; i++) {
@@ -87,17 +116,19 @@ void blurHorizontal(const uchar4* unused, const void* userData, uint32_t x, uint
     }
 }
 
+//
+// Handles vertical stack blur step
+//
 void blurVertical(const uchar4* unused, const void* userData, uint32_t x, uint32_t y) {
     uint3 sum = 0, insum = 0, outsum = 0;
     
     uint8_t r1 = radiusStruct.radius + 1;
     uint32_t yi;
-    int hm = sizeStruct.height - 1;
+    int hmax = sizeStruct.height - 1;
     int yp = -radiusStruct.radius * sizeStruct.width;
        
-    uint16_t stackpointer = radiusStruct.radius;
     uint16_t stackstart;
-    
+    uint16_t stackpointer = radiusStruct.radius;    
     uint3 stack[radiusStruct.radius + radiusStruct.radius + 1];
     
     for (int i = -radiusStruct.radius; i <= radiusStruct.radius; i++) {
@@ -116,7 +147,7 @@ void blurVertical(const uchar4* unused, const void* userData, uint32_t x, uint32
             outsum += *sir;
         }
         
-        if (i < hm) {
+        if (i < hmax) {
             yp += sizeStruct.width;
         }
     }
@@ -133,7 +164,7 @@ void blurVertical(const uchar4* unused, const void* userData, uint32_t x, uint32
         uint3* sir = &stack[stackstart % radiusStruct.div];
         outsum -= *sir;
         
-        uint32_t ymin = x + min(y + r1, hm) * sizeStruct.width;
+        uint32_t ymin = x + min(y + r1, hmax) * sizeStruct.width;
         (*sir).r = rgb[ymin].r;
         (*sir).g = rgb[ymin].g;
         (*sir).b = rgb[ymin].b;
