@@ -206,7 +206,8 @@ public class BlurRenderer {
         // Use canvas translate to match its position on screen
         mCanvas.translate(dx, dy);
         // Clip rect is the same as we have
-        mCanvas.clipRect(mRectVisibleGlobal);
+        // TODO: Why does this not work on API 18?
+        // mCanvas.clipRect(mRectVisibleGlobal);
         // Save current canvas state
         mCanvas.save();
         // Start drawing from the root view
