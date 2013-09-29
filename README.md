@@ -7,6 +7,11 @@ Building the project requires
 - Android SDK Build-tools 18.1
 - You might need to update Android SDK Tools to latest one too (>= 22.2.1)
 
+This is due to android.support.v8 support library enabling RenderScript usage all
+the way back to API 8. Now it remains to be seen does it really work on those devices.
+
+Pretty much all the code is licenced under Apache 2.0 license.
+
 
 Thank Yous
 ==========
