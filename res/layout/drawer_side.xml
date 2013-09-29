@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fi.harism.anndblur.BlurRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:blur="http://schemas.android.com/apk/res/fi.harism.blur"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:background="#2FFA"
+    android:padding="20dp"
+    blur:radius="10dp" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lorem_ipsum"
+        android:textColor="#FFF"
+        android:textSize="18sp" />
+
+</fi.harism.anndblur.BlurRelativeLayout>

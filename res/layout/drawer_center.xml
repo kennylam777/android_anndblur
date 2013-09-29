@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:blur="http://schemas.android.com/apk/res/fi.harism.blur"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- Background image -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_bg" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsum"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+        </FrameLayout>
+    </ScrollView>
+
+    <!-- Header -->
+
+    <fi.harism.anndblur.BlurRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#4FF8"
+        blur:radius="15dp" >
+
+        <ImageView
+            android:id="@+id/button_left"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_button"
+            android:padding="10dp"
+            android:src="@drawable/ic_action_back" />
+
+        <ImageView
+            android:id="@+id/button_right"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_button"
+            android:padding="10dp"
+            android:src="@drawable/ic_action_forward" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/button_right"
+            android:layout_toRightOf="@id/button_left"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="#FFF"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+    </fi.harism.anndblur.BlurRelativeLayout>
+
+    <fi.harism.anndblur.BlurLinearLayout
+        android:id="@+id/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#46CF"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/adjust_blur"
+            android:textColor="#FFF"
+            android:textSize="24sp" />
+
+        <SeekBar
+            android:id="@+id/seekbar_blur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </fi.harism.anndblur.BlurLinearLayout>
+
+</RelativeLayout>
