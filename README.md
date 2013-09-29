@@ -19,6 +19,8 @@ Thank Yous
 - Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com>
 - Background image is from Nicolas Pomepuy's Blur Effect for Android Design -project<br>
   https://github.com/PomepuyN/BlurEffectForAndroidDesign
+- Application icon was found on Google Image Search but I wasn't able to find
+  the creator for crediting the person properly
 
 
 All The Rest
