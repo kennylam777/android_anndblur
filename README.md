@@ -29,7 +29,7 @@ and due had to put all the code within one application project only.
 Will do this re-factoring later on if Android SDK starts supporting RenderScript
 from library projects.. Or I figure out how to do it with current SDK..
 
-Until then :: http://www.youtube.com/watch?v=dX-cVUg57EE
+Until then :: http://youtu.be/weGYilwd1YI
 
 
 Thank Yous
