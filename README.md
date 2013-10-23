@@ -17,7 +17,7 @@ Motivation
 ==========
 
 Idea for this project came from what I saw happening on iOS7 and Blur Effect
-for Android Design -project. But as an Android developer I wanted try to achieve
+for Android Design -project. But as an Android developer I wanted to try achieving
 something more of a flexible framework, namely bundle the effect into existing layouts, in
 order to make it easier for doing experiments on the technique.
 
