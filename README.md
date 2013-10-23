@@ -24,7 +24,7 @@ order to make it easier for doing experiments on the technique.
 Ultimately I wanted to make it all into two separate projects -- one example
 application and a library project one can hook into own applications more easily.
 Unfortunately I faced problems moving RenderScript code into library project
-and due had to put all the code within one application project only.
+and had to put all the code within one application project only.
 
 Will do this re-factoring later on if Android SDK starts supporting RenderScript
 from library projects.. Or I figure out how to do it with current SDK..
